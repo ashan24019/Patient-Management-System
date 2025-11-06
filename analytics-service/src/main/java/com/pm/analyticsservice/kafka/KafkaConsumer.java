@@ -13,6 +13,7 @@ public class KafkaConsumer {
 
     @KafkaListener(topics = "patient", groupId = "analytics-service")
     public void consumeEvent(byte[] event) {
+        log.info("Received patient event, payload size={} bytes", (event == null ? 0 : event.length));
         try {
             PatientEvent patientEvent = PatientEvent.parseFrom(event);
             //... perform any business logic related to the analytics here
